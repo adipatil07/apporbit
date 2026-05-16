@@ -5,7 +5,11 @@ import SectionTag from "@/components/ui/SectionTag";
 import Button from "@/components/ui/Button";
 
 const contactDetails = [
-  { icon: "✉️", label: "aditya.patil@littersoft.com", href: "mailto:aditya.patil@littersoft.com" },
+  {
+    icon: "✉️",
+    label: "adipatil4554@gmail.com",
+    href: "mailto:aditya.patil@littersoft.com",
+  },
   { icon: "📞", label: "+91 9529323131", href: "tel:+919529323131" },
   { icon: "📍", label: "Pune, India", href: null },
 ];
@@ -34,15 +38,32 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Replace with your form submission logic (e.g., Resend, EmailJS, Formspree)
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,7 +100,7 @@ export default function Contact() {
                     <span>{d.icon}</span>
                     <span className="text-sm font-medium">{d.label}</span>
                   </span>
-                )
+                ),
               )}
             </div>
           </div>
@@ -161,9 +182,17 @@ export default function Contact() {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full justify-center">
-                  Send message →
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full justify-center"
+                  disabled={loading}
+                >
+                  {loading ? "Sending…" : "Send message →"}
                 </Button>
+                {error && (
+                  <p className="text-sm text-red-500 text-center">{error}</p>
+                )}
               </form>
             )}
           </div>

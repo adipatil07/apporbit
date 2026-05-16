@@ -32,13 +32,14 @@ export default function About() {
             </h2>
             <p className="text-slate-500 leading-relaxed mb-4">
               AppOrbit was founded with one belief: great software should be
-              within reach for every business. We&apos;re a lean, focused team of
-              developers from Pune, India, with real production experience across
-              industries.
+              within reach for every business. We&apos;re a lean, focused team
+              of developers from Pune, India, with real production experience
+              across industries.
             </p>
             <p className="text-slate-500 leading-relaxed mb-8">
-              We&apos;ve built apps for healthcare companies, legal platforms, and
-              blockchain startups — and we&apos;ve shipped every single one on time.
+              We&apos;ve built apps for healthcare companies, legal platforms,
+              and blockchain startups — and we&apos;ve shipped every single one
+              on time.
             </p>
 
             <div className="flex flex-col gap-5">
@@ -74,8 +75,9 @@ export default function About() {
               </div>
 
               <blockquote className="text-slate-600 leading-relaxed mb-6 text-sm border-l-2 border-indigo-200 pl-4 italic">
-                &quot;I started AppOrbit because I saw too many businesses struggling
-                to find developers who could actually ship. We fix that.&quot;
+                &quot;I started AppOrbit because I saw too many businesses
+                struggling to find developers who could actually ship. We fix
+                that.&quot;
               </blockquote>
 
               <div className="grid grid-cols-2 gap-4 mb-6 p-4 bg-slate-50 rounded-2xl">
@@ -89,7 +91,10 @@ export default function About() {
                 </div>
               </div>
 
-              <Button href="mailto:aditya.patil@littersoft.com" className="w-full justify-center">
+              <Button
+                href="mailto:adipatil4554@gmail.com"
+                className="w-full justify-center"
+              >
                 Work with Aditya
               </Button>
             </div>
