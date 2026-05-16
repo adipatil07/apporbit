@@ -3,16 +3,22 @@ import { stack } from "@/data/stack";
 
 export default function Stack() {
   return (
-    <section id="stack" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-xl mb-16">
+    <section id="stack" className="py-28 bg-white relative overflow-hidden">
+      {/* Accent gradient */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-100/60 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-100/40 rounded-full blur-[80px] pointer-events-none" />
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        <div className="text-center max-w-xl mx-auto mb-16">
           <SectionTag>Tech Stack</SectionTag>
-          <h2 className="text-4xl font-bold text-slate-900 mb-4">
-            Tools we work with
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Tools we{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
+              master
+            </span>
           </h2>
           <p className="text-slate-500 leading-relaxed">
-            A carefully selected stack that balances speed, reliability, and
-            scalability.
+            A carefully selected stack that balances speed, reliability, and scalability.
           </p>
         </div>
 
@@ -20,10 +26,12 @@ export default function Stack() {
           {stack.map((item) => (
             <div
               key={item.name}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-slate-100 bg-slate-50 hover:border-indigo-100 hover:bg-indigo-50/30 hover:shadow-md transition-all duration-200 cursor-default"
+              className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-slate-100 bg-white hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-50 hover:-translate-y-1 transition-all duration-200 cursor-default"
             >
-              <span className="text-3xl">{item.icon}</span>
-              <span className="text-xs font-medium text-slate-600 text-center">
+              <span className="text-3xl group-hover:scale-110 transition-transform duration-200">
+                {item.icon}
+              </span>
+              <span className="text-xs font-semibold text-slate-500 group-hover:text-indigo-600 transition-colors text-center leading-tight">
                 {item.name}
               </span>
             </div>

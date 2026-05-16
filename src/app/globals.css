@@ -1,10 +1,7 @@
 @import "tailwindcss";
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
+  html { scroll-behavior: smooth; }
   body {
     color: #0f172a;
     background: #ffffff;
@@ -12,3 +9,125 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 40%, #f472b6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #67e8f9 0%, #818cf8 60%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Mesh / noise overlay ── */
+.mesh-bg {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(99,102,241,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(167,139,250,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 20%, rgba(34,211,238,0.10) 0%, transparent 50%);
+}
+
+/* ── Glow card border ── */
+.glow-card {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.glow-card:hover {
+  border-color: rgba(129,140,248,0.4);
+  box-shadow: 0 0 30px rgba(129,140,248,0.12), 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* ── Light glow card (for white sections) ── */
+.glow-card-light {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.glow-card-light:hover {
+  border-color: rgba(99,102,241,0.3);
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.06), 0 20px 40px rgba(99,102,241,0.08);
+  transform: translateY(-3px);
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit-spin-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes gradient-border {
+  0%, 100% { border-color: rgba(99,102,241,0.4); }
+  50%       { border-color: rgba(167,139,250,0.6); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+}
+
+.animate-float        { animation: float 4s ease-in-out infinite; }
+.animate-float-delayed{ animation: float-delayed 5s ease-in-out infinite 1s; }
+.animate-pulse-glow   { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-orbit        { animation: orbit-spin 18s linear infinite; }
+.animate-orbit-reverse{ animation: orbit-spin-reverse 12s linear infinite; }
+.animate-fade-up      { animation: fade-up 0.7s ease-out forwards; }
+.animate-badge-pulse  { animation: badge-pulse 2s ease-in-out infinite; }
+
+.animation-delay-100  { animation-delay: 0.1s; }
+.animation-delay-200  { animation-delay: 0.2s; }
+.animation-delay-300  { animation-delay: 0.3s; }
+.animation-delay-500  { animation-delay: 0.5s; }
+.animation-delay-700  { animation-delay: 0.7s; }
+
+/* ── Shimmer button ── */
+.btn-shimmer {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed, #4f46e5);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  transition: box-shadow 0.3s;
+}
+.btn-shimmer:hover {
+  box-shadow: 0 8px 30px rgba(99,102,241,0.45);
+}
+
+/* ── Grid dot pattern ── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(148,163,184,0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Tag colors ── */
+.ptag-blue   { background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; }
+.ptag-green  { background:#f0fdf4; color:#16a34a; border:1px solid #bbf7d0; }
+.ptag-purple { background:#f5f3ff; color:#7c3aed; border:1px solid #ddd6fe; }
+.ptag-orange { background:#fff7ed; color:#ea580c; border:1px solid #fed7aa; }

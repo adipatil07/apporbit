@@ -2,14 +2,9 @@
 
 import { useState } from "react";
 import SectionTag from "@/components/ui/SectionTag";
-import Button from "@/components/ui/Button";
 
 const contactDetails = [
-  {
-    icon: "✉️",
-    label: "adipatil4554@gmail.com",
-    href: "mailto:aditya.patil@littersoft.com",
-  },
+  { icon: "✉️", label: "adipatil4554@gmail.com", href: "mailto:adipatil4554@gmail.com" },
   { icon: "📞", label: "+91 9529323131", href: "tel:+919529323131" },
   { icon: "📍", label: "Pune, India", href: null },
 ];
@@ -23,28 +18,16 @@ const services = [
   "Other",
 ];
 
-type FormState = {
-  name: string;
-  email: string;
-  service: string;
-  message: string;
-};
+type FormState = { name: string; email: string; service: string; message: string };
 
 export default function Contact() {
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    email: "",
-    service: "",
-    message: "",
-  });
+  const [form, setForm] = useState<FormState>({ name: "", email: "", service: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,133 +49,95 @@ export default function Contact() {
     }
   };
 
+  const inputCls = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 transition";
+
   return (
-    <section id="contact" className="py-24 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-28 bg-slate-950 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 dot-grid opacity-20" />
+
+      <div className="relative max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
           {/* Left */}
-          <div>
-            <SectionTag>Contact</SectionTag>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Let&apos;s build something great together
+          <div className="flex flex-col justify-center">
+            <SectionTag className="bg-white/5 text-indigo-300 border border-indigo-500/20">
+              Contact
+            </SectionTag>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+              Let&apos;s build something<br />
+              <span className="gradient-text">great together</span>
             </h2>
-            <p className="text-slate-500 leading-relaxed mb-8">
-              Have a project in mind? Drop us a message and we&apos;ll get back
-              within 24 hours.
+            <p className="text-slate-400 leading-relaxed mb-10">
+              Have a project in mind? Drop us a message and we&apos;ll get back within 24 hours.
             </p>
 
             <div className="flex flex-col gap-4">
               {contactDetails.map((d) =>
                 d.href ? (
-                  <a
-                    key={d.label}
-                    href={d.href}
-                    className="flex items-center gap-3 text-slate-600 hover:text-indigo-600 transition-colors"
+                  <a key={d.label} href={d.href}
+                    className="flex items-center gap-3 text-slate-400 hover:text-indigo-400 transition-colors group"
                   >
-                    <span>{d.icon}</span>
+                    <span className="w-9 h-9 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center group-hover:border-indigo-500/30 transition-colors">
+                      {d.icon}
+                    </span>
                     <span className="text-sm font-medium">{d.label}</span>
                   </a>
                 ) : (
-                  <span
-                    key={d.label}
-                    className="flex items-center gap-3 text-slate-600"
-                  >
-                    <span>{d.icon}</span>
+                  <span key={d.label} className="flex items-center gap-3 text-slate-400">
+                    <span className="w-9 h-9 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center">
+                      {d.icon}
+                    </span>
                     <span className="text-sm font-medium">{d.label}</span>
                   </span>
-                ),
+                )
               )}
             </div>
           </div>
 
           {/* Form */}
-          <div className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
+          <div className="glow-card rounded-3xl p-8">
             {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center">
-                <div className="text-5xl">🎉</div>
-                <h3 className="text-xl font-bold text-slate-900">
-                  Message sent!
-                </h3>
-                <p className="text-slate-500 text-sm">
-                  We&apos;ll get back to you within 24 hours.
-                </p>
+              <div className="flex flex-col items-center justify-center h-full gap-4 py-16 text-center">
+                <div className="text-5xl animate-float">🎉</div>
+                <h3 className="text-xl font-bold text-white">Message sent!</h3>
+                <p className="text-slate-400 text-sm">We&apos;ll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-slate-700">
-                      Your name
-                    </label>
-                    <input
-                      name="name"
-                      type="text"
-                      placeholder="John Smith"
-                      required
-                      value={form.name}
-                      onChange={handleChange}
-                      className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition"
-                    />
+                    <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Your name</label>
+                    <input name="name" type="text" placeholder="John Smith" required value={form.name} onChange={handleChange} className={inputCls} />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-slate-700">
-                      Email address
-                    </label>
-                    <input
-                      name="email"
-                      type="email"
-                      placeholder="john@company.com"
-                      required
-                      value={form.email}
-                      onChange={handleChange}
-                      className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition"
-                    />
+                    <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Email</label>
+                    <input name="email" type="email" placeholder="john@company.com" required value={form.email} onChange={handleChange} className={inputCls} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
-                    Service needed
-                  </label>
-                  <select
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition bg-white"
-                  >
+                  <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Service needed</label>
+                  <select name="service" value={form.service} onChange={handleChange} className={inputCls + " bg-slate-900"}>
                     <option value="">Select a service…</option>
-                    {services.map((s) => (
-                      <option key={s}>{s}</option>
-                    ))}
+                    {services.map((s) => <option key={s}>{s}</option>)}
                   </select>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
-                    Tell us about your project
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    placeholder="Describe your idea, timeline, and budget…"
-                    required
-                    value={form.message}
-                    onChange={handleChange}
-                    className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition resize-none"
-                  />
+                  <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Your project</label>
+                  <textarea name="message" rows={4} placeholder="Describe your idea, timeline, and budget…" required value={form.message} onChange={handleChange} className={inputCls + " resize-none"} />
                 </div>
 
-                <Button
+                <button
                   type="submit"
-                  size="lg"
-                  className="w-full justify-center"
                   disabled={loading}
+                  className="btn-shimmer w-full py-3.5 rounded-xl text-white font-semibold text-sm disabled:opacity-60 disabled:cursor-not-allowed mt-1"
                 >
                   {loading ? "Sending…" : "Send message →"}
-                </Button>
-                {error && (
-                  <p className="text-sm text-red-500 text-center">{error}</p>
-                )}
+                </button>
+
+                {error && <p className="text-sm text-red-400 text-center">{error}</p>}
               </form>
             )}
           </div>
